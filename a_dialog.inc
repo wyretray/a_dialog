@@ -1,3 +1,7 @@
+/*
+	a_dialog include, created by wyretray, based and inspired on White_116 and Emmet_ ez_dialog include
+*/
+
 #define _d: 		#@_dialog_
 #define dlg:%0(%1)	@_dialog_%0(%1, response, listitem, inputtext[]); \
 					@_dialog_%0(%1, response, listitem, inputtext[])
@@ -17,9 +21,10 @@ stock _ShowPlayerDialog(playerid, dialogID[], style, caption[], info[], primaryB
 	return ShowPlayerDialog(playerid, DIALOG_DEFAULT_ID, style, caption, info, primaryButton, secondaryButton);
 }
 
+// Hooking default callback
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-	if(dialogid != DIALOG_DEFAULT_ID) return false;
+	if(dialogid != DIALOG_DEFAULT_ID) return false; // If it's not a include function - don't continue
 	new dialogFunction[32];
 	GetPVarString(playerid, "dialogFunction", dialogFunction, sizeof dialogFunction);
 	if(strlen(inputtext) == 0) { if(CallLocalFunction(dialogFunction, "iii", playerid, response, listitem)) return 1; }
